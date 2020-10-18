@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Artsurf</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="css/main.css">
+    
+</head>
+<body>
+    <div id="app">
+        
+        <div class="cards ml-3">
+           
+            <div class="card" style="width: 25rem;" v-for="beer in beers">
+                <img v-bind:src="beer.image_url" class="card-img-top" v-bind:alt="beer.name">
+                <div class="card-body">
+                    <h5 class="card-title"><b>#{{ beer.id }}</b> {{ beer.name }}</h5>
+                    <p class="card-text">{{ beer.description }}</p>
+                    <p class="card-text"><small>{{ beer.brewers_tips }}</small></p>
+                    <button class="btn btn-secondary" data-toggle="modal" data-target="#modal-edit" @click="id = beer.id">Edit</button>
+                    <button class="btn btn-danger" @click="Delete(beer.id)">Delete</button>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="modal fade" id="modal-edit">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Edit #{{ id }}</h4>
+              </div>
+              <div class="modal-body">
+                <p>Type new name and description</p>
+                <form>
+                   <div class="form-group">
+                    <label for="newName">New Name</label>
+                    <input type="text" v-model="newName" id="newName" class="form-control">
+                   </div>
+                   <div class="form-group">
+                    <label for="newName">New Description</label>
+                    <textarea v-model="newDescription" id="newDescription" class="form-control"></textarea>
+                   </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary float-right" @click="Edit(id)" data-dismiss="modal">Edit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="pagination my-4" v-show="showButton">
+            <button class="btn btn-primary mx-auto" @click="NextPage()">{{ textButton }}</button>
+        </div>
+    </div>
+    
+    <!-- Vue.js, Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    
+    <!-- main script -->
+    <script src="js/main.js"></script>
+    
+</body>
+</html>
